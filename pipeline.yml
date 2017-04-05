@@ -7,7 +7,7 @@ resources:
     private_key: {{private-repo-key}}
 
 jobs:
-- name: hello-world
+- name: run-tests
   plan:
   - get: concourse
     trigger: true
@@ -22,5 +22,4 @@ jobs:
           repository: ruby
           tag: 2.3.0
       run:
-        path: rails
-        args: ["test"]
+        path: ./concourse/run-rails-tests.sh
