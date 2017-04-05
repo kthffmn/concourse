@@ -11,7 +11,7 @@ jobs:
   plan:
   - get: concourse
     trigger: true
-  - task: say-hello
+  - task: rails-test
     config:
       inputs:
       - name: concourse
@@ -20,6 +20,5 @@ jobs:
         type: docker-image
         source:
           repository: mwallasch/docker-ruby-node
-          tag: 2.3.0
       run:
         path: ./concourse/run-rails-tests.sh
