@@ -5,6 +5,7 @@ resources:
     uri: git@github.com:kthffmn/concourse.git
     branch: master
     private_key: {{private-repo-key}}
+
 jobs:
 - name: hello-world
   plan:
@@ -12,9 +13,12 @@ jobs:
     trigger: true
   - task: say-hello
     config:
-      platform: linux
+      inputs:
+      - name: concourse
       image_resource:
         type: docker-image
-        source: {repository: ubuntu}
+        source:
+          repository: ruby
+          tag: 2.3.0
       run:
-        path: say-hello.sh
+        path: ./concourse/say-hello.sh
