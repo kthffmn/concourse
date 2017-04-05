@@ -22,4 +22,5 @@ jobs:
           repository: ruby
           tag: 2.3.0
       run:
-        path: ./concourse/say-hello.sh
+        path: rails
+        args: ["test"]
