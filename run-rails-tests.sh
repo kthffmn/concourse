@@ -3,5 +3,5 @@ set -e -x
 
 pushd concourse
 	bundle install --without production
-	rails test
+	bundle exec rails test
 popd
