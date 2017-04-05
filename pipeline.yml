@@ -15,6 +15,7 @@ jobs:
     config:
       inputs:
       - name: concourse
+      platform: linux
       image_resource:
         type: docker-image
         source:
