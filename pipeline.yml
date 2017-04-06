@@ -2,7 +2,10 @@ resources:
 - name: concourse
   type: git
   source:
-    uri: https://github.com/kthffmn/concourse.git
+    uri: git@github.com:kthffmn/concourse.git
+    branch: master
+    private_key: {{private-repo-key}}
+
 jobs:
 - name: run-tests
   plan:
