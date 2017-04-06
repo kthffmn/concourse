@@ -5,7 +5,6 @@ resources:
     uri: git@github.com:kthffmn/concourse.git
     branch: master
     private_key: {{private-repo-key}}
-
 jobs:
 - name: run-tests
   plan:
