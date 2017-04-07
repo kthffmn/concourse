@@ -16,6 +16,12 @@ resources:
   type: slack-notification
   source:
     url: {{slack-web-hook}}
+- name: tracker-output
+  type: tracker
+  source:
+    token: {{private-tracker-token}}
+    project_id: {{tracker-proj-id}}
+    tracker_url: https://www.pivotaltracker.com
 
 jobs:
 - name: run-tests
@@ -40,3 +46,7 @@ jobs:
           The build failed. Check it out at:
           https://cf-onboarding-kentucky-ave.ci.cf-app.com/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
         silent: true
+  - put: tracker-output
+    params: 
+      repos: 
+        - concourse
