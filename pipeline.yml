@@ -1,3 +1,10 @@
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
 resources:
 - name: concourse
   type: git
@@ -9,6 +16,7 @@ resources:
   type: slack-notification
   source:
     url: {{slack-web-hook}}
+
 jobs:
 - name: run-tests
   plan:
@@ -22,13 +30,13 @@ jobs:
       image_resource:
         type: docker-image
         source:
-          repository: ruby
-          tag: 2.3.0
+          repository: kahoffman/ruby-node
       run:
         path: ./concourse/run-rails-tests.sh
     on_failure:
       put: slack-alert
       params:
-        text: Job failed!
-        channel: '#cf_onboarding_labs'
+        text:  |
+          The build failed. Check it out at:
+          https://cf-onboarding-kentucky-ave.ci.cf-app.com/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
         silent: true
