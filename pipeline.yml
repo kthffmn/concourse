@@ -4,6 +4,10 @@ resource_types:
   source:
     repository: cfcommunity/slack-notification-resource
     tag: latest
+- name: tracker-resource
+  type: docker-image
+  source:
+    repository: concourse/tracker-resource
 
 resources:
 - name: concourse
@@ -17,7 +21,7 @@ resources:
   source:
     url: {{slack-web-hook}}
 - name: tracker-output
-  type: tracker
+  type: tracker-resource
   source:
     token: {{private-tracker-token}}
     project_id: {{tracker-proj-id}}
